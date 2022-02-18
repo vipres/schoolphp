@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/app.css">
-    <title>Home</title>
-</head>
-<body>
-    <h1>This is Home</h1>
-    <i class="fa-solid fa-user"></i>
-</body>
-</html>
+<?php $this->view('includes/header'); ?>
+        <div class="container-fluid">
+            <h1>This is Home</h1>
+            <i class="fa-solid fa-user"></i>
+    </div>
+
+<?php $this->view('includes/footer'); ?>

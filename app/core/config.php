@@ -1,4 +1,5 @@
 <?php
 
+define('APPDIR', __DIR__."/../../app/");
+define('ROOT', "http://schoolphp.test/");
 
-const APPDIR = __DIR__."/../../app/";

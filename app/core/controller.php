@@ -13,9 +13,9 @@ class Controller {
 
         if(file_exists(APPDIR."/Views/".$view.".view.php"))
         {
-            return file_get_contents(APPDIR."/Views/".$view.".view.php");
+            require (APPDIR."/Views/".$view.".view.php");
         }else{
-            return file_get_contents(APPDIR."/Views/404.view.php");
+            require (APPDIR."/Views/404.view.php");
         }
     }
 
