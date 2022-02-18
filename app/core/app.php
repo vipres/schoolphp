@@ -1,6 +1,9 @@
 <?php
+namespace app\Core;
 
-class App
+use app\Core\Auth;
+
+class App extends Auth
 {
     protected $controller = "HomeController";
     protected $method  = "index";
@@ -19,6 +22,9 @@ class App
           y la instancia de $controller que por defecto es HomeController ahora sera
           StudentController
        */
+      if($URL[0] === "login"){
+        return $this->login($URL[0]);
+      }
 
        if(file_exists(APPDIR."Controllers/".ucfirst($URL[0])."Controller.php"))
        {
@@ -36,7 +42,16 @@ class App
         * que incluya este require ej: Si el require esta llamando a StudentsController.php estaremos con
         * $this->controller = new $this->controller haciendo una nueva instancia de la clase StudentController
         */
-        $this->controller = new $this->controller;
+
+        //$this->controller = new $this->controller;
+
+        //Adaptacion al psr4 y namespaces
+        $controller_path = '\app\Controllers';
+        $controller = $this->controller;
+        $load_class ="$controller_path\\$controller";
+        $this->controller = new $load_class;
+
+
 
 
 

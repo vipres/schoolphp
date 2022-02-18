@@ -1,0 +1,16 @@
+{
+    "name": "usuario/schoolphp",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        },
+        "files": ["app/core/config.php"]
+    },
+    "authors": [
+        {
+            "name": "Manolo Cabrera",
+            "email": "viprestal@hotmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,8 +1,13 @@
-<?php $this->view('../includes/header'); ?>
+<?php $this->view('includes.header'); ?>
         <div class="container-fluid">
             <div class="mx-auto shadow rounded" style="width: 100%; max-width: 310px;">
                 Holaaa!!!
             </div>
         </div>
 
-<?php $this->view('../includes/footer'); ?>
+<?php
+
+$this->view('includes.footer');
+
+?>
+

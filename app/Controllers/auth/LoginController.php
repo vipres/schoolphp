@@ -1,5 +1,6 @@
 <?php
-
+namespace app\Controllers\Auth;
+use app\Core\Controller;
 class LoginController extends Controller
 {
     public function __construct()
@@ -9,6 +10,6 @@ class LoginController extends Controller
 
     public function index()
     {
-        $this->view('login');
+        $this->view('auth.login');
     }
 }
