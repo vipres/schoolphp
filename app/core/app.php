@@ -54,12 +54,11 @@ class App
 
     private function controllerExists()
     {
-        match($this->URL[0]){
-            empty($this->URL[0]) => $data = ucfirst(HOME),
-        };
+
+
 
         if(empty($this->URL[0])){
-            if (file_exists(APPDIR . "Controllers/" . ucfirst(HOME) . "Controller.php")) {
+            if (file_exists(APPDIR . CONTROLLER_DIR."/"  . ucfirst(HOME) . "Controller.php")) {
                 $this->completeControllerName()->loadnamespace();
                 }
             }
@@ -68,13 +67,13 @@ class App
              $this->controller_path = "auth";
           }
             if (is_null($this->controller_path)) {
-                if (file_exists(APPDIR . "Controllers/" . ucfirst($this->URL[0]) . "Controller.php")) {
+                if (file_exists(APPDIR .CONTROLLER_DIR."/" . ucfirst($this->URL[0]) . "Controller.php")) {
 
                     $this->completeControllerName()->loadnamespace();
                 }
             }else{
 
-                if(file_exists(APPDIR."Controllers/".$this->controller_path."/".ucfirst($this->URL[0])."Controller.php"))
+                if(file_exists(APPDIR.CONTROLLER_DIR."/" .$this->controller_path."/".ucfirst($this->URL[0])."Controller.php"))
                 {
 
                 $this->completeControllerName()->loadnamespace($this->controller_path);
