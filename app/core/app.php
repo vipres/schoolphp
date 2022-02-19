@@ -1,78 +1,68 @@
 <?php
 namespace app\Core;
 
-use app\Core\Auth;
 
-class App extends Auth
+class App
 {
-    protected $controller = "HomeController";
+    protected $controller = HOME;
     protected $method  = "index";
     protected $params  = array();
+    protected $controller_path = null;
 
     public function __construct()
     {
 
        $URL = $this->getURL();
 
-       /*
-        Tomo el parametro que viene por la url
-        Si existe un archivo que por la url sea /students en primer
-        segmento $URL[0] añadele Controller.php y buicalo en la carpeta
-        app/Controllers
-          y la instancia de $controller que por defecto es HomeController ahora sera
-          StudentController
-       */
+       if(empty($URL[0])){
+        if (file_exists(APPDIR . "Controllers/" . ucfirst(HOME) . "Controller.php")) {
+            $this->controller = ucfirst(HOME) . "Controller";
+
+            $controller_path = '\app\Controllers';
+            $controller = $this->controller;
+            $load_class = "$controller_path\\$controller";
+            $this->controller = new $load_class;
+            }
+        }
+
       if($URL[0] === "login"){
-        return $this->login($URL[0]);
+         $this->controller_path = "auth";
       }
 
-       if(file_exists(APPDIR."Controllers/".ucfirst($URL[0])."Controller.php"))
-       {
-            $this->controller = ucfirst($URL[0])."Controller";
-            unset($URL[0]);
-                 /*
-        Si este if se cumple llamará a ../app/Controllers/(Students o lo que sea)Controller.php
-        en el require sino tomara el valor por defecto de HomeController
-       **/
-
-       require APPDIR."Controllers/".$this->controller.".php";
-
-       /**
-        * Una vez tenemos el require del archivo de controlador hecho hago una nueva instancia de la clase
-        * que incluya este require ej: Si el require esta llamando a StudentsController.php estaremos con
-        * $this->controller = new $this->controller haciendo una nueva instancia de la clase StudentController
-        */
-
-        //$this->controller = new $this->controller;
-
-        //Adaptacion al psr4 y namespaces
-        $controller_path = '\app\Controllers';
-        $controller = $this->controller;
-        $load_class ="$controller_path\\$controller";
-        $this->controller = new $load_class;
+        if (is_null($this->controller_path)) {
+            if (file_exists(APPDIR . "Controllers/" . ucfirst($URL[0]) . "Controller.php")) {
+                $this->controller = ucfirst($URL[0]) . "Controller";
+                unset($URL[0]);
+                $this->loadnamespace();
 
 
-
-
-
-            if(isset($URL[1]))
-            {
-                if(method_exists($this->controller, $URL[1]))
-                {
-
-                    $this->method = ucfirst($URL[1]);
-                    unset($URL[1]);
-                }
             }
-            $URL = array_values($URL);
-            $this->params = $URL;
-            call_user_func_array([$this->controller, $this->method],$this->params);
+        }else{
 
-       }
+            if(file_exists(APPDIR."Controllers/".$this->controller_path."/".ucfirst($URL[0])."Controller.php"))
+            {
+            $this->controller = ucfirst($URL[0])."Controller";
+
+            $this->loadnamespace($this->controller_path);
+            }
+        }
 
 
 
-    }
+        if (isset($URL[1])) {
+            if (method_exists($this->controller, $URL[1])) {
+
+                $this->method = ucfirst($URL[1]);
+                unset($URL[1]);
+            }
+        }
+        $URL = array_values($URL);
+        $this->params = $URL;
+        call_user_func_array([$this->controller, $this->method], $this->params);
+
+}
+
+
 
 /*
     esta funcion es para obtener la url limpia y todos los parametros
@@ -85,7 +75,7 @@ class App extends Auth
             es la variable que se pasa a través del htaccess
             RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
         */
-        $url = isset($_GET['url']) ? $_GET['url'] : "HomeController";
+        $url = isset($_GET['url']) ? $_GET['url'] : HOME;
 
            /**
      * Array
@@ -98,5 +88,23 @@ class App extends Auth
         )
      */
         return explode("/", filter_var(trim($url, "/")), FILTER_SANITIZE_URL);
+    }
+
+    private function loadnamespace($subdir = null)
+    {
+                if(!is_null($subdir)){
+                    $controller_path = '\app\Controllers\\'.$subdir;
+                    $controller = $this->controller;
+                    $load_class = "$controller_path\\$controller";
+                    $this->controller = new $load_class;
+
+
+                }else{
+                    $controller_path = '\app\Controllers';
+                    $controller = $this->controller;
+                    $load_class = "$controller_path\\$controller";
+                    $this->controller = new $load_class;
+                }
+
     }
 }
