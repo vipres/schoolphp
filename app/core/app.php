@@ -14,6 +14,9 @@ class App
     {
 
        $this->URL = $this->getURL();
+       if($this->URL[0] === "login"){
+        $this->controller_path = "auth";
+     }
        $this->controllerExists();
        $this->loadMethod();
 
@@ -62,17 +65,12 @@ class App
                 $this->completeControllerName()->loadnamespace();
                 }
             }
-
-          if($this->URL[0] === "login"){
-             $this->controller_path = "auth";
-          }
             if (is_null($this->controller_path)) {
                 if (file_exists(APPDIR .CONTROLLER_DIR."/" . ucfirst($this->URL[0]) . "Controller.php")) {
 
                     $this->completeControllerName()->loadnamespace();
                 }
             }else{
-
                 if(file_exists(APPDIR.CONTROLLER_DIR."/" .$this->controller_path."/".ucfirst($this->URL[0])."Controller.php"))
                 {
 
