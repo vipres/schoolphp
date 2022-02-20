@@ -9,17 +9,14 @@ class App
     protected $params  = array();
     protected $controller_path = null;
     protected $URL = HOME;
-    protected $especiales = ["login", "signup"];
 
     public function __construct()
     {
 
-
        $this->URL = $this->getURL();
-
-       if(in_array($this->URL[0], $this->especiales)){
+       if($this->URL[0] === "login"){
         $this->controller_path = "auth";
-        }
+     }
        $this->controllerExists();
        $this->loadMethod();
 
@@ -61,20 +58,17 @@ class App
     private function controllerExists()
     {
 
-            if(empty($this->URL[0])){
-                if (file_exists(APPDIR . CONTROLLER_DIR."/"  . ucfirst(HOME) . "Controller.php")) {
+
+
+        if(empty($this->URL[0])){
+            if (file_exists(APPDIR . CONTROLLER_DIR."/"  . ucfirst(HOME) . "Controller.php")) {
                 $this->completeControllerName()->loadnamespace();
                 }
             }
-
             if (is_null($this->controller_path)) {
                 if (file_exists(APPDIR .CONTROLLER_DIR."/" . ucfirst($this->URL[0]) . "Controller.php")) {
 
                     $this->completeControllerName()->loadnamespace();
-                }elseif (file_exists(APPDIR . CONTROLLER_DIR."/"  . ucfirst(HOME) . "Controller.php")){
-
-                    $this->controller = ucfirst(HOME) . "Controller";
-                    $this->loadnamespace();
                 }
             }else{
                 if(file_exists(APPDIR.CONTROLLER_DIR."/" .$this->controller_path."/".ucfirst($this->URL[0])."Controller.php"))
