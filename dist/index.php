@@ -1,8 +1,18 @@
 <?php
 
 //require("../app/core/autoload.php");
-require("../vendor/autoload.php");
 
-use app\Core\App;
+use app\Core\Application;
 
-$app = new App();
+require_once __DIR__."/../vendor/autoload.php";
+
+$app = new Application();
+
+$app->router->get('/', function(){
+    echo "Estoy aqui";
+});
+
+
+$app->run();
+
+
