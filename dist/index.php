@@ -1,7 +1,7 @@
 <?php
 
 
-
+use app\controllers\auth\AuthController;
 use app\Controllers\HomeController;
 use app\Core\Application;
 
