@@ -121,11 +121,32 @@ class Router
             $$key = $value;
         }
 
+        $directory = $this->subdirView($view);
 
         ob_start();
-        include_once Application::$ROOT_DIR."/app/Views/$view.view.php";
+        include_once Application::$ROOT_DIR."/app/Views/$directory.view.php";
         return ob_get_clean();
+    }
 
+    public function subdirView($view = null)
+    {
+        $array_view = explode(".", $view);
+        $size_array_view = count($array_view);
+        if($size_array_view > 1){
+            foreach ($array_view as $key => $value){
+                $new_array_view[$key] = $value;
+            }
+            return "$new_array_view[0]/$new_array_view[1]";
+        }else{
+            if(isset($new_array_view[0]))
+            {
+                return $new_array_view[0] = $array_view;
+            }else{
+               return $view;
+            }
+
+        }
+        # code...
     }
 
 

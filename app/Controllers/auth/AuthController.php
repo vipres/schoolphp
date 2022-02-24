@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function login()
     {
         $this->setLayout('auth');
-        return $this->view('login');
+        return $this->view('auth.login');
     }
 
     public function register(Request $request)
@@ -20,6 +20,6 @@ class AuthController extends Controller
         }
 
         $this->setLayout('auth');
-        return $this->view('register');
+        return $this->view('auth.signup');
     }
 }

@@ -1,8 +1,8 @@
-<?php $this->view('includes.header'); ?>
+
         <div class="container-fluid">
             <div class="mt-5 p-4 mx-auto shadow rounded w-100" style="max-width: 340px;">
                 <h2 class="text-center">My School</h2>
-                <img src="<?=ROOT."img/logo.png"?>" alt="" class="border border-primary d-block mx-auto rounded-circle" style="width:200px">
+                <img src="<?=ASSET."img/logo.png"?>" alt="" class="border border-primary d-block mx-auto rounded-circle" style="width:200px">
                 <h3>Login</h3>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
@@ -21,9 +21,4 @@
             </div>
         </div>
 
-<?php
-
-$this->view('includes.footer');
-
-?>
 
