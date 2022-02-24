@@ -21,7 +21,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light p-2">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
         <img src="<?=ASSET."img/logo.png"?>" alt="" class="" style="width:50px">
         My School
     </a>
@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">DASHBOARD</a>
+          <a class="nav-link active" aria-current="page" href="/">DASHBOARD</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">CLASSES</a>
@@ -44,8 +44,8 @@
             USER
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Profile</a></a></li>
-            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+            <li><a class="dropdown-item" href="/profile">Profile</a></a></li>
+            <li><a class="dropdown-item" href="/">Dashboard</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Log Out</a></li>
           </ul>
@@ -57,7 +57,7 @@
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb justify-content-center">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Library</li>
   </ol>
 </nav>
