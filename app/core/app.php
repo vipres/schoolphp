@@ -48,7 +48,7 @@ class App
         }
         $controller = $this->controller;
         $load_class = "$controller_path\\$controller";
-        $this->controller = new $load_class;
+        $this->controller = new $load_class();
     }
 
     private function completeControllerName ($partial = null)

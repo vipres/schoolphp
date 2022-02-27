@@ -66,6 +66,16 @@ Gracias a este require se pueden usar toda la herencia de controller en las vist
             return $narry[0] = $arr_view;
         }
     }
+
+    public function load_model($model)
+    {
+        if(class_exists("\app\Models\/".ucfirst($model)))
+        {
+            $modelinstance = "\app\Models\/".ucfirst($model);
+            return $model = new $modelinstance;
+        }
+        return false;
+    }
 }
 
 
