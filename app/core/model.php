@@ -42,13 +42,10 @@ class Model extends Database {
     {
         $keys = array_keys($data);
         $columns = implode(',', $keys);
-        $values = implode(',:', $keys);
+        $values =implode(',:', $keys);
 
-        $query ="insert into $this->table ($columns) values (:$values)";
-    echo '<pre>';
-    var_dump($query);
-    echo '<pre>';
-    exit();
+        $query ="INSERT INTO $this->table ($columns) VALUES (:$values)";
+
         return $this->query($query, $data);
     }
     public function update($id, $data)

@@ -30,7 +30,10 @@ class HomeController extends Controller
       $arr['user_id'] ='dsdsd';
       $arr['gender'] ='female';
       $arr['school_id'] ='10';
-      $arr['rank'] ='students';
+      $arr['role'] ='students';
+
+
+
 
         $user = new User();
         $user->insert($arr);
